@@ -1,0 +1,19 @@
+# Ignore all node_modules at any depth
+**/node_modules/
+
+# Ignore common build outputs and dependency locks
+**/dist/
+**/build/
+**/out/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore environment variables and secrets (Security Best Practice)
+**/.env*
+**/.venv/
+
+# Ignore massive log files and system files
+**/*.log
+**/.DS_Store
+**/.git/

@@ -1,0 +1,78 @@
+{
+  "auth": [
+    {
+      "name": "red",
+      "display": "Red Provider",
+      "configId": "red",
+      "authority": "https://localhost:4000/red",
+      "redirectUrl": "http://localhost:4200/auth/callback/red",
+      "postLogoutRedirectUri": "http://localhost:4200/",
+      "clientId": "work-app",
+      "scope": "openid profile email offline_access",
+      "responseType": "code",
+      "silentRenew": true,
+      "useRefreshToken": true,
+      "renewTimeBeforeTokenExpiresInSeconds": 30,
+      "unauthorizedRoute": "/auth",
+      "authWellknownEndpoints": {
+        "issuer": "https://localhost:4000/red",
+        "jwksUri": "https://localhost:4000/red/.well-known/jwks.json",
+        "authorizationEndpoint": "https://localhost:4000/red/authorize",
+        "tokenEndpoint": "https://localhost:4000/red/token",
+        "userinfoEndpoint": "https://localhost:4000/red/userinfo"
+      }
+    },
+    {
+      "name": "blue",
+      "display": "Blue Provider",
+      "configId": "blue",
+      "authority": "https://localhost:4000/blue",
+      "redirectUrl": "http://localhost:4200/auth/callback/blue",
+      "postLogoutRedirectUri": "http://localhost:4200/",
+      "clientId": "work-app",
+      "scope": "openid profile email offline_access",
+      "responseType": "code",
+      "silentRenew": true,
+      "useRefreshToken": true,
+      "renewTimeBeforeTokenExpiresInSeconds": 30,
+      "unauthorizedRoute": "/auth",
+      "authWellknownEndpoints": {
+        "issuer": "https://localhost:4000/blue",
+        "jwksUri": "https://localhost:4000/blue/.well-known/jwks.json",
+        "authorizationEndpoint": "https://localhost:4000/blue/authorize",
+        "tokenEndpoint": "https://localhost:4000/blue/token",
+        "userinfoEndpoint": "https://localhost:4000/blue/userinfo"
+      }
+    },
+    {
+      "name": "green",
+      "display": "Green Provider",
+      "configId": "green",
+      "authority": "https://localhost:4000/green",
+      "redirectUrl": "http://localhost:4200/auth/callback/green",
+      "postLogoutRedirectUri": "http://localhost:4200/",
+      "clientId": "work-app",
+      "scope": "openid profile email offline_access",
+      "responseType": "code",
+      "silentRenew": true,
+      "useRefreshToken": true,
+      "renewTimeBeforeTokenExpiresInSeconds": 30,
+      "unauthorizedRoute": "/auth",
+      "authWellknownEndpoints": {
+        "issuer": "https://localhost:4000/green",
+        "jwksUri": "https://localhost:4000/green/.well-known/jwks.json",
+        "authorizationEndpoint": "https://localhost:4000/green/authorize",
+        "tokenEndpoint": "https://localhost:4000/green/token",
+        "userinfoEndpoint": "https://localhost:4000/green/userinfo"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "example-group",
+      "display": "Example Group",
+      "listUrl": "/api/example/list",
+      "itemUrl": "/api/example/item"
+    }
+  ]
+}

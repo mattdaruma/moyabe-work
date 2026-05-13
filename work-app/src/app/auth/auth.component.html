@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <h2>Authentication</h2>
+  <p>Select an authentication provider to log in.</p>
+  
+  <div class="row mt-4">
+    @for (provider of config.auth; track provider.name) {
+      <div class="col-md-6 mb-3">
+        <app-auth-card [provider]="provider"></app-auth-card>
+      </div>
+    }
+  </div>
+</div>
