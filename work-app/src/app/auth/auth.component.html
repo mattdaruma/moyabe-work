@@ -3,9 +3,9 @@
   <p>Select an authentication provider to log in.</p>
   
   <div class="row mt-4">
-    @for (provider of config.auth; track provider.name) {
+    @for (session of sessionsSig(); track session.config.name) {
       <div class="col-md-6 mb-3">
-        <app-auth-card [provider]="provider"></app-auth-card>
+        <app-auth-card [session]="session"></app-auth-card>
       </div>
     }
   </div>

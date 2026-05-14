@@ -64,7 +64,7 @@ providers.forEach(provider => {
       id_token_signing_alg_values_supported: ["RS256"],
       scopes_supported: ["openid", "profile", "email", "offline_access"],
       token_endpoint_auth_methods_supported: ["client_secret_post", "client_secret_basic", "none"],
-      claims_supported: ["sub", "iss", "aud", "exp", "iat", "provider", "nonce"],
+      claims_supported: ["sub", "iss", "aud", "exp", "iat", "provider", "nonce", "roles"],
       grant_types_supported: ["authorization_code", "refresh_token"]
     });
   });
@@ -148,13 +148,13 @@ providers.forEach(provider => {
       }
 
       const idToken = jwt.sign(
-        { sub: session.username, provider: provider, nonce: session.nonce },
+        { sub: session.username, provider: provider, nonce: session.nonce, roles: ["my-guy"]  },
         keys[provider].private,
         { algorithm: 'RS256', expiresIn: '1h', issuer: issuer, audience: client_id || 'work-app', keyid: `${provider}-key-1` }
       );
 
       const accessToken = jwt.sign(
-        { sub: session.username, provider: provider },
+        { sub: session.username, provider: provider, roles: ["my-guy"] },
         keys[provider].private,
         { algorithm: 'RS256', expiresIn: '1h', issuer: issuer, audience: 'work-api', keyid: `${provider}-key-1` }
       );
@@ -221,7 +221,8 @@ providers.forEach(provider => {
       res.json({
         sub: decoded.sub,
         name: decoded.sub,
-        provider: provider
+        provider: provider,
+        roles: ["my-guy"]
       });
     } catch (err) {
       res.status(401).json({ error: 'invalid_token' });

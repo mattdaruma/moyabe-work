@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, OnDestroy, computed, signal } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, computed, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthConfig } from '../../work-app-config';
 import { AuthService } from './auth.service';
-import { Subscription, interval } from 'rxjs';
+import { map, timer } from 'rxjs';
+import { AuthSession } from './auth-session.interface';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-auth-card',
@@ -10,62 +11,39 @@ import { Subscription, interval } from 'rxjs';
   standalone: true,
   imports: [CommonModule]
 })
-export class AuthCardComponent implements OnInit, OnDestroy {
-  @Input() provider!: AuthConfig;
-  
-  providerState = computed(() => this.authService.authState()[this.provider.name]);
-  
-  timeRemaining = signal('--');
-  renewalRemaining = signal('');
-  
-  private timerSub!: Subscription;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.timerSub = interval(1000).subscribe(() => {
-      this.updateRemainingTime();
-    });
-    this.updateRemainingTime();
-  }
-
-  ngOnDestroy() {
-    if (this.timerSub) {
-      this.timerSub.unsubscribe();
+export class AuthCardComponent {
+  @Input() session!: AuthSession;
+  private authService = inject(AuthService)
+  private timer = timer(0, 1000).pipe(map(_ => {
+    if(!this.session.accessToken || !this.session.accessToken.exp){
+      return null;
     }
-  }
-
-  updateRemainingTime() {
-    const state = this.providerState();
-    if (!state || !state.expirationTime) {
-      this.timeRemaining.set('--');
-      this.renewalRemaining.set('');
-      return;
-    }
-    
     const now = Date.now();
-    const diff = state.expirationTime - now;
-    
+    const diff = (this.session.accessToken.exp * 1000) - now;
     if (diff <= 0) {
-      this.timeRemaining.set('Expired');
-      this.renewalRemaining.set('');
-      return;
+      return 'Expired';
     }
-
-    this.timeRemaining.set(this.formatDiff(diff));
-
-    if (this.provider.silentRenew && this.provider.renewTimeBeforeTokenExpiresInSeconds) {
-      const renewDiff = diff - (this.provider.renewTimeBeforeTokenExpiresInSeconds * 1000);
+    return diff;
+  }))
+  public expiresInSig = toSignal(this.timer.pipe(map(state => {
+    if(state === null) return '--';
+    if(state === 'Expired') return 'Expired';
+    return this.formatDiff(state)
+  })))
+  public renewsInSig = toSignal(this.timer.pipe(map(state => {
+    if(state === null || state === 'Expired') return null;
+    if (this.session.config.silentRenew && this.session.config.renewTimeBeforeTokenExpiresInSeconds) {
+      const renewDiff = state - (this.session.config.renewTimeBeforeTokenExpiresInSeconds * 1000);
       if (renewDiff <= 0) {
-        this.renewalRemaining.set('Renewing...');
+        return 'Renewing...';
       } else {
-        this.renewalRemaining.set(this.formatDiff(renewDiff));
+        return this.formatDiff(renewDiff);
       }
     } else {
-      this.renewalRemaining.set('');
+      return null
     }
-  }
-
+  })))
+  
   formatDiff(diff: number): string {
     const totalSeconds = Math.floor(diff / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -74,14 +52,14 @@ export class AuthCardComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.authService.login(this.provider.name);
+    this.authService.login(this.session.config.name);
   }
 
   logout() {
-    this.authService.logout(this.provider.name);
+    this.authService.logout(this.session.config.name);
   }
 
   renew() {
-    this.authService.renew(this.provider.name);
+    this.authService.renew(this.session.config.name);
   }
 }

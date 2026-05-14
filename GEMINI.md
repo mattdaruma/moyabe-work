@@ -24,28 +24,7 @@ Moyabe Work prototypes a dynamic, data-driven application system designed to mod
 - **Configuration-Driven Bootstrapping:** App behavior is defined by `WorkAppConfig` (injected via `WORK_APP_CONFIG` token), loaded before the app initializes.
 - **Loose Coupling:** The app is completely agnostic to backend implementations. It only expects a REST API conforming to its JSON schemas and standard OAuth/OIDC JWT authentication.
 - **Authentication & Auto-Renewal:** Auth is handled by `angular-auth-oidc-client`. The application initializes auth immediately upon load (`checkAuth()`) to handle active sessions and clear expired tokens. Providers are configured to support silent background renewal using `silentRenew` and `renewTimeBeforeTokenExpiresInSeconds` settings from the application config.
-- **Angular Template Syntax [HIGH PRIORITY]:** ALWAYS prefer the modern Angular control flow directives (`@if`, `@for`, `@switch`, etc.) over legacy structural directives (`*ngIf`, `*ngFor`, etc.). Do not write new code using legacy star directives.
-- **State Management & Reactivity [HIGH PRIORITY]:** When passing data from a component to an HTML template, ALWAYS use Angular Signals (`signal()`, `computed()`). Use RxJS pipes to handle events, async streams, and transformations through the logic layer, and subscribe/tap to update the signals that drive the template.
 
-**Configuration Contract (`src/work-app-config.ts`):**
-```typescript
-interface AuthConfig extends OpenIdConfiguration {
-  name: string;
-  display: string;
-}
-
-interface WorkGroupConfig {
-  name: string;
-  display: string;
-  listUrl: string;
-  itemUrl: string;
-}
-
-interface WorkAppConfig {
-  auth: AuthConfig[];
-  groups: WorkGroupConfig[];
-}
-```
 
 ---
 
@@ -85,3 +64,4 @@ interface WorkAppConfig {
 ## Development Standards
 - **HTTPS Enforcement:** Both `work-api` and `work-auth` enforce HTTPS locally to mirror enterprise deployment constraints. Ensure local certs are trusted.
 - **Modularity:** Strict separation of concerns. `work-app` must never reference mock logic; it must operate purely on network contracts.
+- **RxJS Standards [HIGH PRIORITY]:** Strict reactive unidirectional data flow. All data manipulation must occur within RxJS streams. The UI consumes data exclusively via Angular Signals generated using `toSignal()`. Manual `.subscribe()` is strictly forbidden unless triggering a one-off side effect with `.pipe(take(1))`. (See `work-app/GEMINI.md` for detailed rules).

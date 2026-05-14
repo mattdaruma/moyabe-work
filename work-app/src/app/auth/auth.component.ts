@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WORK_APP_CONFIG, WorkAppConfig } from '../../work-app-config';
 import { AuthCardComponent } from './auth-card.component';
+import { AuthService } from './auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -11,7 +12,6 @@ import { AuthCardComponent } from './auth-card.component';
   imports: [CommonModule, AuthCardComponent]
 })
 export class AuthComponent {
-  constructor(
-    @Inject(WORK_APP_CONFIG) public config: WorkAppConfig
-  ) {}
+  private auth = inject(AuthService)
+  public sessionsSig = toSignal(this.auth.sessions$)
 }
