@@ -1,0 +1,65 @@
+@if((loggedInSig()?.length ?? 0) === 1) {
+<div class="ms-auto d-flex align-items-center">
+    <span class="navbar-text p-0">
+        {{loggedInSig()![0].user.display}}
+    </span>
+</div>
+}
+@if((loggedInSig()?.length ?? 0) > 1) {
+<div class="ms-auto d-flex align-items-center">
+    <span class="navbar-text p-0">
+        {{loggedInSig()!.length}} Users
+    </span>
+</div>
+}
+<li class="nav-item dropdown">
+    <a class="nav-link px-2" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+        aria-label="Auth">
+        <i class="bi bi-person-lines-fill fs-4"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end position-absolute" aria-labelledby="authDropdown">
+        <li><a class="dropdown-item" href="/auth">
+                <i class="bi bi-people"></i>
+                Auth Page
+            </a></li>
+        @if((loggedInSig()?.length ?? 0) > 0) {
+        <li (click)="$event.stopPropagation()">
+            <hr (click)="$event.stopPropagation()" class="dropdown-divider">
+        </li>
+        <li (click)="$event.stopPropagation()">
+            <span class="dropdown-item-text">
+                <i class="bi bi-door-closed"></i>
+                Logout
+            </span>
+        </li>
+        }
+        @for(session of loggedInSig(); track session.config.name) {
+        <li>
+            <button class="dropdown-item" (click)="logout(session.config.name)">
+                <i class="bi bi-person-fill"></i> {{session.config.display}}
+                @if(session.user?.name){
+                : {{session.user.name}}
+                }
+            </button>
+        </li>
+        }
+        @if((loggedOutSig()?.length ?? 0) > 0) {
+        <li (click)="$event.stopPropagation()">
+            <hr (click)="$event.stopPropagation()" class="dropdown-divider">
+        </li>
+        <li (click)="$event.stopPropagation()">
+            <span class="dropdown-item-text">
+                <i class="bi bi-door-open"></i>
+                Login
+            </span>
+        </li>
+        }
+        @for(session of loggedOutSig(); track session.config.name) {
+        <li>
+            <button class="dropdown-item" (click)="login(session.config.name)">
+                <i class="bi bi-person"></i> {{session.config.display}}
+            </button>
+        </li>
+        }
+    </ul>
+</li>

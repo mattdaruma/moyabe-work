@@ -1,7 +1,6 @@
 <div class="container mt-4">
-  <h2>Authentication</h2>
-  <p>Select an authentication provider to log in.</p>
-  
+  <h2>Login Portal@if(sessionsSig()?.length ?? 0 > 1){s}
+  </h2>
   <div class="row mt-4">
     @for (session of sessionsSig(); track session.config.name) {
       <div class="col-md-6 mb-3">

@@ -1,4 +1,8 @@
 {
+  "ui": {
+    "title": "Matt's Work App",
+    "icon": "arrow-through-heart-fill"
+  },
   "auth": [
     {
       "name": "red",

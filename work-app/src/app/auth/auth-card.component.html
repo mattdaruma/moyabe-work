@@ -4,7 +4,7 @@
 
         @if (session.isAuthenticated) {
         <p class="card-text text-success mb-2">Logged In
-            : {{ session.user.sub || session.user.name || 'Unknown' }}
+            : {{ session.user.display }}
         </p>
 
         @if (expiresInSig(); as expiresIn) {
