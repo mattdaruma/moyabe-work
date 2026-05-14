@@ -3,6 +3,7 @@
     {
       "name": "red",
       "display": "Red Provider",
+      "postLoginRoute": "/auth",
       "configId": "red",
       "authority": "https://localhost:4000/red",
       "redirectUrl": "http://localhost:4200/auth/callback/red",
@@ -25,6 +26,7 @@
     {
       "name": "blue",
       "display": "Blue Provider",
+      "postLoginRoute": "/auth",
       "configId": "blue",
       "authority": "https://localhost:4000/blue",
       "redirectUrl": "http://localhost:4200/auth/callback/blue",
@@ -47,6 +49,7 @@
     {
       "name": "green",
       "display": "Green Provider",
+      "postLoginRoute": "/auth",
       "configId": "green",
       "authority": "https://localhost:4000/green",
       "redirectUrl": "http://localhost:4200/auth/callback/green",

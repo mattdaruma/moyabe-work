@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 
@@ -8,12 +8,9 @@ import { AuthService } from './auth/auth.service';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App implements OnInit {
+export class App {
   protected readonly title = signal('moyabe-app');
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-    this.authService.checkAuth().subscribe();
-  }
 }

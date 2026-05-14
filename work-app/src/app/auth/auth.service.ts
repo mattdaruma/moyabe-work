@@ -5,12 +5,6 @@ import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { AuthSession } from './auth-session.interface';
 
-export interface ProviderAuthState {
-  isLoggedIn: boolean;
-  userData: any;
-  expirationTime: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,20 +50,5 @@ export class AuthService {
 
   renew(providerName: string): Subscription {
     return this.oidcSecurityService.forceRefreshSession(undefined, providerName).pipe(take(1)).subscribe();
-  }
-
-  checkAuth(): Observable<LoginResponse[]> {
-    return this.oidcSecurityService.checkAuthMultiple();
-  }
-
-  isLoggedIn(providerName: string): Observable<boolean> {
-    return this.oidcSecurityService.isAuthenticated(providerName).pipe(
-      map((result: any) => {
-        if (typeof result === 'boolean') {
-          return result;
-        }
-        return result?.isAuthenticated ?? false;
-      })
-    );
   }
 }
