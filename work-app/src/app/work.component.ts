@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { WORK_APP_CONFIG, WorkAppConfig } from '../work-app-config';
@@ -17,7 +17,7 @@ import { WORK_APP_CONFIG, WorkAppConfig } from '../work-app-config';
   imports: [ReactiveFormsModule, FormlyModule],
   standalone: true
 })
-export class WorkComponent implements OnInit {
+export class WorkComponent implements OnDestroy {
   @Input() workID!: string;
 
   constructor(@Inject(WORK_APP_CONFIG) public config: WorkAppConfig) {}
@@ -36,11 +36,17 @@ export class WorkComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {
-    // Component logic initialized with workID ignored/presented
-  }
+  private valChangeSub = this.form.valueChanges.subscribe(v => console.log('FORM VALUE CHANGE', v));
+  private statusChangeSub = this.form.statusChanges.subscribe(s => console.log('FORM STATUS CHANGE', s));
+  private formEventSub = this.form.events.subscribe(e => console.log('FORM EVENT', e))
 
   onSubmit(model: any) {
     console.log(model);
+  }
+
+  ngOnDestroy(): void {
+    this.valChangeSub.unsubscribe();
+    this.statusChangeSub.unsubscribe();
+    this.formEventSub.unsubscribe();
   }
 }

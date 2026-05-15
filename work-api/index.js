@@ -4,14 +4,11 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const db = require('../work-db');
 
 const app = express();
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
@@ -63,7 +60,34 @@ const authenticateToken = (req, res, next) => {
 
 // Example protected endpoint
 app.get('/api/protected', authenticateToken, (req, res) => {
-  res.json({ message: `Hello ${req.user.username}, this is a protected endpoint.` });
+      // const { customerId } = req.params;
+      //   const query = `
+      //       SELECT o.OrderID, o.OrderDate, c.CompanyName, o.ShipCity 
+      //       FROM Orders o
+      //       JOIN Customers c ON o.CustomerID = c.CustomerID
+      //       WHERE o.CustomerID = ?
+      //   `;
+      //   const statement = db.prepare(query);
+      //   const results = statement.all(customerId);
+      const tableQuery = `SELECT name FROM sqlite_master WHERE type='table';`
+      const tableColumnQuery = `
+        SELECT m.name AS table_name, p.name AS column_name, p.type AS data_type
+        FROM sqlite_master AS m
+        JOIN pragma_table_info(m.name) AS p
+        WHERE m.type = 'table'
+        ORDER BY m.name;
+        `
+      //GEMINI: help me out here with a suggestion for how to run a query with no parameters against my sqlite3 db const
+      const statement = db.prepare(tableColumnQuery)
+      const results = statement.all()
+      const allTableData = results.map(r => r['table_name'])
+      const uniqueTables = [... new Set(allTableData)]
+      let simpleSchema = {}
+      for(let t of uniqueTables){
+        simpleSchema[t] = results.filter(r => r['table_name'] === t).map(r => { return {column: r['column_name'], type: r['data_type']}})
+      }
+      fs.writeFileSync('../work-db/northwind-simple-schema.json', JSON.stringify(simpleSchema, null, 2), 'utf8')
+  res.json({ message: `Hello ${req.user.username}, this is a protected endpoint.`, data: simpleSchema});
 });
 
 const httpsOptions = {

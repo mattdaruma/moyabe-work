@@ -1,0 +1,390 @@
+{
+  "Categories": [
+    {
+      "column": "CategoryID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "CategoryName",
+      "type": "TEXT"
+    },
+    {
+      "column": "Description",
+      "type": "TEXT"
+    },
+    {
+      "column": "Picture",
+      "type": "BLOB"
+    }
+  ],
+  "CustomerCustomerDemo": [
+    {
+      "column": "CustomerID",
+      "type": "TEXT"
+    },
+    {
+      "column": "CustomerTypeID",
+      "type": "TEXT"
+    }
+  ],
+  "CustomerDemographics": [
+    {
+      "column": "CustomerTypeID",
+      "type": "TEXT"
+    },
+    {
+      "column": "CustomerDesc",
+      "type": "TEXT"
+    }
+  ],
+  "Customers": [
+    {
+      "column": "CustomerID",
+      "type": "TEXT"
+    },
+    {
+      "column": "CompanyName",
+      "type": "TEXT"
+    },
+    {
+      "column": "ContactName",
+      "type": "TEXT"
+    },
+    {
+      "column": "ContactTitle",
+      "type": "TEXT"
+    },
+    {
+      "column": "Address",
+      "type": "TEXT"
+    },
+    {
+      "column": "City",
+      "type": "TEXT"
+    },
+    {
+      "column": "Region",
+      "type": "TEXT"
+    },
+    {
+      "column": "PostalCode",
+      "type": "TEXT"
+    },
+    {
+      "column": "Country",
+      "type": "TEXT"
+    },
+    {
+      "column": "Phone",
+      "type": "TEXT"
+    },
+    {
+      "column": "Fax",
+      "type": "TEXT"
+    }
+  ],
+  "EmployeeTerritories": [
+    {
+      "column": "EmployeeID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "TerritoryID",
+      "type": "TEXT"
+    }
+  ],
+  "Employees": [
+    {
+      "column": "EmployeeID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "LastName",
+      "type": "TEXT"
+    },
+    {
+      "column": "FirstName",
+      "type": "TEXT"
+    },
+    {
+      "column": "Title",
+      "type": "TEXT"
+    },
+    {
+      "column": "TitleOfCourtesy",
+      "type": "TEXT"
+    },
+    {
+      "column": "BirthDate",
+      "type": "DATE"
+    },
+    {
+      "column": "HireDate",
+      "type": "DATE"
+    },
+    {
+      "column": "Address",
+      "type": "TEXT"
+    },
+    {
+      "column": "City",
+      "type": "TEXT"
+    },
+    {
+      "column": "Region",
+      "type": "TEXT"
+    },
+    {
+      "column": "PostalCode",
+      "type": "TEXT"
+    },
+    {
+      "column": "Country",
+      "type": "TEXT"
+    },
+    {
+      "column": "HomePhone",
+      "type": "TEXT"
+    },
+    {
+      "column": "Extension",
+      "type": "TEXT"
+    },
+    {
+      "column": "Photo",
+      "type": "BLOB"
+    },
+    {
+      "column": "Notes",
+      "type": "TEXT"
+    },
+    {
+      "column": "ReportsTo",
+      "type": "INTEGER"
+    },
+    {
+      "column": "PhotoPath",
+      "type": "TEXT"
+    }
+  ],
+  "Order Details": [
+    {
+      "column": "OrderID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "ProductID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "UnitPrice",
+      "type": "NUMERIC"
+    },
+    {
+      "column": "Quantity",
+      "type": "INTEGER"
+    },
+    {
+      "column": "Discount",
+      "type": "REAL"
+    }
+  ],
+  "Orders": [
+    {
+      "column": "OrderID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "CustomerID",
+      "type": "TEXT"
+    },
+    {
+      "column": "EmployeeID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "OrderDate",
+      "type": "DATETIME"
+    },
+    {
+      "column": "RequiredDate",
+      "type": "DATETIME"
+    },
+    {
+      "column": "ShippedDate",
+      "type": "DATETIME"
+    },
+    {
+      "column": "ShipVia",
+      "type": "INTEGER"
+    },
+    {
+      "column": "Freight",
+      "type": "NUMERIC"
+    },
+    {
+      "column": "ShipName",
+      "type": "TEXT"
+    },
+    {
+      "column": "ShipAddress",
+      "type": "TEXT"
+    },
+    {
+      "column": "ShipCity",
+      "type": "TEXT"
+    },
+    {
+      "column": "ShipRegion",
+      "type": "TEXT"
+    },
+    {
+      "column": "ShipPostalCode",
+      "type": "TEXT"
+    },
+    {
+      "column": "ShipCountry",
+      "type": "TEXT"
+    }
+  ],
+  "Products": [
+    {
+      "column": "ProductID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "ProductName",
+      "type": "TEXT"
+    },
+    {
+      "column": "SupplierID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "CategoryID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "QuantityPerUnit",
+      "type": "TEXT"
+    },
+    {
+      "column": "UnitPrice",
+      "type": "NUMERIC"
+    },
+    {
+      "column": "UnitsInStock",
+      "type": "INTEGER"
+    },
+    {
+      "column": "UnitsOnOrder",
+      "type": "INTEGER"
+    },
+    {
+      "column": "ReorderLevel",
+      "type": "INTEGER"
+    },
+    {
+      "column": "Discontinued",
+      "type": "TEXT"
+    }
+  ],
+  "Regions": [
+    {
+      "column": "RegionID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "RegionDescription",
+      "type": "TEXT"
+    }
+  ],
+  "Shippers": [
+    {
+      "column": "ShipperID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "CompanyName",
+      "type": "TEXT"
+    },
+    {
+      "column": "Phone",
+      "type": "TEXT"
+    }
+  ],
+  "Suppliers": [
+    {
+      "column": "SupplierID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "CompanyName",
+      "type": "TEXT"
+    },
+    {
+      "column": "ContactName",
+      "type": "TEXT"
+    },
+    {
+      "column": "ContactTitle",
+      "type": "TEXT"
+    },
+    {
+      "column": "Address",
+      "type": "TEXT"
+    },
+    {
+      "column": "City",
+      "type": "TEXT"
+    },
+    {
+      "column": "Region",
+      "type": "TEXT"
+    },
+    {
+      "column": "PostalCode",
+      "type": "TEXT"
+    },
+    {
+      "column": "Country",
+      "type": "TEXT"
+    },
+    {
+      "column": "Phone",
+      "type": "TEXT"
+    },
+    {
+      "column": "Fax",
+      "type": "TEXT"
+    },
+    {
+      "column": "HomePage",
+      "type": "TEXT"
+    }
+  ],
+  "Territories": [
+    {
+      "column": "TerritoryID",
+      "type": "TEXT"
+    },
+    {
+      "column": "TerritoryDescription",
+      "type": "TEXT"
+    },
+    {
+      "column": "RegionID",
+      "type": "INTEGER"
+    }
+  ],
+  "sqlite_sequence": [
+    {
+      "column": "name",
+      "type": ""
+    },
+    {
+      "column": "seq",
+      "type": ""
+    }
+  ]
+}

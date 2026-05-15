@@ -1,3 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-
+/* markdown table styling */
+markdown {
+  table {
+    @extend .table;
+    @extend .table-bordered;
+    @extend .table-striped;
+    margin: 2rem 0;
+    
+    th, td {
+      padding: 1.25rem !important; /* Forces the spacing you want */
+      vertical-align: middle;
+    }
+    
+    thead th {
+      background-color: var(--bs-tertiary-bg);
+    }
+  }
+}

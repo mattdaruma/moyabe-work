@@ -5,14 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { authInterceptor } from 'angular-auth-oidc-client';
-
 import { routes } from './app.routes';
+import { provideMarkdown } from 'ngx-markdown';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([authInterceptor()])),
-    importProvidersFrom(ReactiveFormsModule, FormlyModule.forRoot(), FormlyBootstrapModule)
+    importProvidersFrom(ReactiveFormsModule, FormlyModule.forRoot(), FormlyBootstrapModule),
+    provideMarkdown(),
   ],
 };

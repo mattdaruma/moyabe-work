@@ -7,11 +7,9 @@
     {
       "name": "red",
       "display": "Red Provider",
-      "postLoginRoute": "/auth",
       "configId": "red",
       "authority": "https://localhost:4000/red",
       "redirectUrl": "http://localhost:4200/auth/callback/red",
-      "postLogoutRedirectUri": "http://localhost:4200/",
       "clientId": "work-app",
       "scope": "openid profile email offline_access",
       "responseType": "code",
@@ -19,6 +17,9 @@
       "useRefreshToken": true,
       "renewTimeBeforeTokenExpiresInSeconds": 30,
       "unauthorizedRoute": "/auth",
+      "secureRoutes": [
+        "https://localhost:3000/api/"
+      ],
       "authWellknownEndpoints": {
         "issuer": "https://localhost:4000/red",
         "jwksUri": "https://localhost:4000/red/.well-known/jwks.json",
@@ -30,11 +31,9 @@
     {
       "name": "blue",
       "display": "Blue Provider",
-      "postLoginRoute": "/auth",
       "configId": "blue",
       "authority": "https://localhost:4000/blue",
       "redirectUrl": "http://localhost:4200/auth/callback/blue",
-      "postLogoutRedirectUri": "http://localhost:4200/",
       "clientId": "work-app",
       "scope": "openid profile email offline_access",
       "responseType": "code",
@@ -42,6 +41,9 @@
       "useRefreshToken": true,
       "renewTimeBeforeTokenExpiresInSeconds": 30,
       "unauthorizedRoute": "/auth",
+      "secureRoutes": [
+        "https://localhost:3000/api/"
+      ],
       "authWellknownEndpoints": {
         "issuer": "https://localhost:4000/blue",
         "jwksUri": "https://localhost:4000/blue/.well-known/jwks.json",
@@ -53,11 +55,9 @@
     {
       "name": "green",
       "display": "Green Provider",
-      "postLoginRoute": "/auth",
       "configId": "green",
       "authority": "https://localhost:4000/green",
       "redirectUrl": "http://localhost:4200/auth/callback/green",
-      "postLogoutRedirectUri": "http://localhost:4200/",
       "clientId": "work-app",
       "scope": "openid profile email offline_access",
       "responseType": "code",
