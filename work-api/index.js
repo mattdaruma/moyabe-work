@@ -77,7 +77,6 @@ app.get('/api/protected', authenticateToken, (req, res) => {
         WHERE m.type = 'table'
         ORDER BY m.name;
         `
-      //GEMINI: help me out here with a suggestion for how to run a query with no parameters against my sqlite3 db const
       const statement = db.prepare(tableColumnQuery)
       const results = statement.all()
       const allTableData = results.map(r => r['table_name'])

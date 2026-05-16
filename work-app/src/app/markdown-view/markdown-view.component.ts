@@ -5,14 +5,10 @@ import { MarkdownComponent } from 'ngx-markdown';
   selector: 'app-markdown',
   standalone: true,
   imports: [MarkdownComponent],
-  template: `
-    <div class="container my-4">
-      <markdown [data]="markdownContent"></markdown>
-    </div>
-  `,
-  styleUrl: './markdown.component.scss'
+  templateUrl: './markdown-view.component.html',
+  styleUrl: './markdown-view.component.scss'
 })
-export class MdViewComponent {
+export class MarkdownViewComponent {
   markdownContent = `
 # H1: Corporate Overview (heading[depth=1])
 This is a paragraph (paragraph) with **Strong Text** (strong) and *Emphasized Text* (emphasis).

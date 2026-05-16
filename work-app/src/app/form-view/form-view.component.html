@@ -1,0 +1,7 @@
+<h2>Work Item: {{ workID }}</h2>
+<p>Formly with Bootstrap is set up!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+  <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>

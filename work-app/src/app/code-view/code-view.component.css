@@ -1,0 +1,16 @@
+.code-view-wrapper {
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: var(--bs-border-radius, 0.375rem);
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* Ensure codemirror takes appropriate height */
+::ng-deep .cm-editor {
+  height: 100%;
+  min-height: 200px;
+}
+
+::ng-deep .cm-scroller {
+  font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}

@@ -4,13 +4,7 @@ import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth-callback',
-  template: `
-    <div class="container mt-4">
-      <div class="alert alert-info">
-        Processing authentication...
-      </div>
-    </div>
-  `,
+  templateUrl: './auth-callback.component.html',
   standalone: true
 })
 export class AuthCallbackComponent {
